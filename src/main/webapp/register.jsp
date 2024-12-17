@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>UT-NodeJS 중간고사 | Register</title>
 
-    <!-- 학생 이름과 학번 -->
+    <!-- 이현우 20231789 -->
     <meta name="author" content="???" />
     <meta name="description" content="???" />
 
@@ -25,6 +25,52 @@
 
     <!-- JS 파일에 대한 script테그를 수정하십시오 -->
     <script defer src="${pageContext.request.contextPath}/public/js/functions.js"></script>
+    <script>
+      // 폼 검증 함수
+      function validateForm() {
+        // 필수 필드 값 가져오기
+        var name = document.getElementById("floatingName").value;
+        var email = document.getElementById("floatingEmail").value;
+        var phone = document.getElementById("floatingPhone").value;
+        var password = document.getElementsByName("password")[0].value;
+        var gender = document.querySelector('input[name="gender"]:checked');
+        var hobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+
+        // 필수 입력값 체크
+        if (!name || !email || !phone || !password) {
+          alert("모든 필드를 입력하세요.");
+          return false;
+        }
+
+        // 이메일 형식 검증
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailPattern.test(email)) {
+          alert("유효한 이메일 주소를 입력하세요.");
+          return false;
+        }
+
+        // 전화번호 형식 검증 (예시: 10자리 숫자만 허용)
+        var phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone)) {
+          alert("유효한 전화번호를 입력하세요.");
+          return false;
+        }
+
+        // 성별 선택 여부 확인
+        if (!gender) {
+          alert("성별을 선택하세요.");
+          return false;
+        }
+
+        // 취미 체크 여부 확인
+        if (hobbies.length === 0) {
+          alert("적어도 하나의 취미를 선택하세요.");
+          return false;
+        }
+
+        return true;  // 검증 성공
+      }
+    </script>
   </head>
 
   <body>
